@@ -67,6 +67,75 @@ describe "#translate" do
 
   # Test-driving bonus:
   # * write a test asserting that capitalized words are still capitalized (but with a different initial capital letter, of course)
+
+  it "Cap translates a word beginning with a vowel" do
+    s = translate("Apple")
+    expect(s).to eq("Appleay")
+  end
+
+  it "Cap translates a word beginning with a consonant" do
+    s = translate("Banana")
+    expect(s).to eq("Ananabay")
+  end
+
+  it "Cap translates a word beginning with two consonants" do
+    s = translate("Cherry")
+    expect(s).to eq("Errychay")
+  end
+
+  it "Cap translates two words" do
+    s = translate("Eat Pie")
+    expect(s).to eq("Eatay Iepay")
+  end
+
+  it "Cap translates a word beginning with three consonants" do
+    expect(translate("Three")).to eq("Eethray")
+  end
+
+  it "Cap counts 'sch' as a single phoneme" do
+    s = translate("School")
+    expect(s).to eq("Oolschay")
+  end
+
+  it "Cap counts 'qu' as a single phoneme" do
+    s = translate("Quiet")
+    expect(s).to eq("Ietquay")
+  end
+
+  it "Cap counts 'qu' as a consonant even when it's preceded by a consonant" do
+    s = translate("Square")
+    expect(s).to eq("Aresquay")
+  end
+
+  it "Cap translates many words" do
+    s = translate("The Quick brown Fox")
+    expect(s).to eq("Ethay Ickquay ownbray Oxfay")
+  end
+
   # * retain the punctuation from the original phrase
+
+  it "get punctuation" do
+     s = get_punctuation("TFox!!?!,?")
+    expect(s).to eq("!!?!,?")
+  end
+  it "get punctuation without punctuation" do
+     s = get_punctuation("TFox")
+    expect(s).to eq("")
+  end
+
+  it "chop of punctuation" do
+     s = chop_off_punctuation("Fox!!?!,?")
+    expect(s).to eq("Fox")
+  end
+
+  it "chop of punctuation without punctuation" do
+     s = chop_off_punctuation("Fox")
+    expect(s).to eq("Fox")
+  end
+
+   it "Cap translates many words" do
+    s = translate("The? Quick!,: brown, Fox:!!")
+    expect(s).to eq("Ethay? Ickquay!,: ownbray, Oxfay:!!")
+  end
 
 end
